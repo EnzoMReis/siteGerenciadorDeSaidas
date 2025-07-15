@@ -18,21 +18,19 @@ btn.addEventListener("click", (e) => {
     email: email,
   };
   
-  console.log(data);
-
-  // fetch("http://localhost:8081/aluno", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(data),
-  // })
-  //   .then((res) => res.json())
-  //   .then((dados) => {
-  //     res.innerHTML = `<p>Aluno Cadastrado com Sucesso <br><br><br> Nome: ${nome} <br> Sobrenome: ${sobrenome} <br>
-  //     Matricula: ${matricula} <br> Telefone: ${telefone} <br> Email: ${email}</p>`;
-  //   })
-  //   .catch(() => {
-  //     res.innerHTML = `<p style="color:red;">Erro ao cadastrar Aluno!</p>`;
-  //   });
+  fetch("http://localhost:8081/aluno", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((dados) => {
+      res.innerHTML = `<p>Aluno Cadastrado com Sucesso <br><br><br> Nome: ${nome} <br> Sobrenome: ${sobrenome} <br>
+      Matricula: ${matricula} <br> Telefone: ${telefone} <br> Email: ${email}</p>`;
+    })
+    .catch(() => {
+      res.innerHTML = `<p style="color:red;">Erro ao cadastrar Aluno!</p>`;
+    });
 });
 
 function toTitleCase(str) {
