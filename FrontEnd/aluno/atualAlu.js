@@ -66,3 +66,22 @@ codAluno.addEventListener("change", (e) => {
     }
   });
 });
+
+function toTitleCase(str) {
+  return str.toLowerCase().replace(/(^|\s)(\p{L})/gu, (_, separator, char) => separator + char.toUpperCase());
+
+  /* '_' matches the complete match of the regex
+     'separator' matches the first group (^|\s) which is either the beginning of the string or a whitespace character
+     'char' matches the second group (\p{L}) which is any Unicode Letter Character
+  
+     (^|\s): Beggining of the string or a whitespace character
+     (\p{L}): any Unicode Letter Character
+     /g is a global search, meaning it will search for all matches in the string
+     /u is to put in unicode(UTF-16) code
+     /gu is just the 2 of them at the same time */
+}
+
+function formatNames(name) {
+  const formattedNames = toTitleCase(name);
+  return formattedNames;
+}
