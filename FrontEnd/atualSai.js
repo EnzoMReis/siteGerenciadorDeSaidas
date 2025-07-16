@@ -21,8 +21,8 @@ btn.addEventListener("click", (e) => {
     status: dataObject.status,
     nomeAluno: dataObject.nomeAluno,
     nomeProfessor: dataObject.nomeProfessor,
-    aluno_cod: dataObject.aluno_cod,
-    professor_cod: dataObject.professor_cod,
+    aluno_cod: dataObject.aluno.codAluno,
+    professor_cod: dataObject.professor.codProfessor,
   };
 
   fetch(`http://localhost:8081/saida/${dataObject.codSaida}`, {

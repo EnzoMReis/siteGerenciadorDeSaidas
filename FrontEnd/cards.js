@@ -1,31 +1,31 @@
 function createCard(saida) {
-  let cod_aluno, cod_professor;
+  // let cod_aluno, cod_professor;
 
-  fetch(`http://localhost:8081/aluno`)
-    .then((res) => res.json())
-    .then((alunos) => {
-      alunos.forEach((aluno) => {
-        if (aluno.nome === saida.nomeAluno) {
-          cod_aluno = aluno.codAluno;
-        }
-      });
-    })
-    .catch((err) => {
-      console.error("Erro ao carregar alunos", err);
-    });
+  // fetch(`http://localhost:8081/aluno`)
+  //   .then((res) => res.json())
+  //   .then((alunos) => {
+  //     alunos.forEach((aluno) => {
+  //       if (aluno.nome === saida.nomeAluno) {
+  //         cod_aluno = aluno.codAluno;
+  //       }
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.error("Erro ao carregar alunos", err);
+  //   });
 
-  fetch(`http://localhost:8081/professor`)
-    .then((res) => res.json())
-    .then((professores) => {
-      professores.forEach((professor) => {
-        if (professor.nome === saida.nomeProfessor) {
-          cod_professor = professor.codProfessor;
-        }
-      });
-    })
-    .catch((err) => {
-      console.error("Erro ao carregar professores", err);
-    });
+  // fetch(`http://localhost:8081/professor`)
+  //   .then((res) => res.json())
+  //   .then((professores) => {
+  //     professores.forEach((professor) => {
+  //       if (professor.nome === saida.nomeProfessor) {
+  //         cod_professor = professor.codProfessor;
+  //       }
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.error("Erro ao carregar professores", err);
+  //   });
 
   const card = document.createElement("div");
   card.className = "card-entry";
@@ -99,8 +99,8 @@ function createCard(saida) {
         status: "Aprovado",
         nomeAluno: saida.nomeAluno,
         nomeProfessor: saida.nomeProfessor,
-        aluno_cod: cod_aluno,
-        professor_cod: cod_professor,
+        aluno_cod: saida.aluno.codAluno,
+        professor_cod: saida.professor.codProfessor,
       };
 
       console.log("PUT payload:", payload);
@@ -135,8 +135,8 @@ function createCard(saida) {
         status: "Recusado",
         nomeAluno: saida.nomeAluno,
         nomeProfessor: saida.nomeProfessor,
-        aluno_cod: cod_aluno,
-        professor_cod: cod_professor,
+        aluno_cod: saida.aluno.codAluno,
+        professor_cod: saida.professor.codProfessor,
       };
 
       console.log("PUT payload:", payload);
@@ -182,8 +182,8 @@ function createCard(saida) {
         status: "Finalizado",
         nomeAluno: saida.nomeAluno,
         nomeProfessor: saida.nomeProfessor,
-        aluno_cod: cod_aluno,
-        professor_cod: cod_professor,
+        aluno_cod: saida.aluno.codAluno,
+        professor_cod: saida.professor.codProfessor,
       };
 
       console.log("PUT payload:", payload);
@@ -210,9 +210,7 @@ function createCard(saida) {
   const btnEdit = card.querySelector(".btn_edit");
   btnEdit.addEventListener("click", () => {
     const payload = {
-      ...saida,
-      aluno_cod: cod_aluno,
-      professor_cod: cod_professor,
+      ...saida
     };
 
     // Armazena os dados num objeto serializado e passa como parâmetro de URL

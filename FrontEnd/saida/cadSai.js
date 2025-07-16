@@ -4,14 +4,12 @@ let res = document.getElementById("res");
 document.addEventListener("DOMContentLoaded", () => {
     const alunoSelect = document.getElementById("aluno");
     const professorSelect = document.getElementById("professor");
-    let sobrenomeAluno, sobrenomeProfessor;
   
     fetch("http://localhost:8081/aluno")
       .then(res => res.json())
       .then(alunos => {
         alunos.forEach(aluno => {
-          alunoSelect.innerHTML += `<option data-nome="${aluno.nome}" value="${aluno.codAluno}">${aluno.nome} ${aluno.sobrenome}</option>`;
-          sobrenomeAluno = aluno.sobrenome;
+          alunoSelect.innerHTML += `<option data-nome="${aluno.nome} ${aluno.sobrenome}" value="${aluno.codAluno}">${aluno.nome} ${aluno.sobrenome}</option>`;
         });
       })
     .catch(err => {
@@ -22,8 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.json())
       .then(professores => {
         professores.forEach(professor => {
-            professorSelect.innerHTML += `<option data-nome="${professor.nome}" value="${professor.codProfessor}">${professor.nome} ${professor.sobrenome}</option>`;
-            sobrenomeProfessor = professor.sobrenome;
+            professorSelect.innerHTML += `<option data-nome="${professor.nome} ${professor.sobrenome}" value="${professor.codProfessor}">${professor.nome} ${professor.sobrenome}</option>`;
         });
       })
     .catch(err => {
@@ -46,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }) + `.${ms}`;
   
       let dataSolicitacao = new Date().toISOString().slice(0, 10);
-      let horaSaida = timeWithMs;
+      let horaSaida = timeWithMs; // hora do pedido
       let horaRetorno = "00:00";
       let motivo = document.getElementById("motivo").value;
       let localDestino = document.getElementById("local").value;
@@ -77,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.json())
       .then(dados => {
         res.innerHTML = `<p>Saída cadastrada com sucesso! <br><br><br> Data de Solicitação: ${dataSolicitacao} <br> Motivo: ${motivo} 
-        <br> Local: ${localDestino} <br> status: ${status} <br> Aluno Requisitando: ${nomeAluno} ${sobrenomeAluno} <br> Professor em Atividade: ${nomeProfessor} ${sobrenomeProfessor}</p>`;
+        <br> Local: ${localDestino} <br> status: ${status} <br> Aluno Requisitando: ${nomeAluno} <br> Professor em Atividade: ${nomeProfessor}</p>`;
       })
       .catch(() => {
         res.innerHTML = `<p style="color:red;">Erro ao cadastrar Saída!</p>`;
